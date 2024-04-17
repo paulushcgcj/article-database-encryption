@@ -1,0 +1,37 @@
+io:
+  github:
+    paulushcgcj:
+      database:
+        host: ${DB_HOST:localhost}
+        name: ${DB_NAME:default}
+        username: ${DB_USER:default}
+        password: ${DB_PASS:default}
+        key: ${DB_KEY:AES_KEY}
+        ssl-path: ${SSL_PATH}
+
+micronaut:
+  application:
+    name: dbcrypt
+  config:
+    files:
+      - config/application-local.yml
+datasources:
+  default:
+    driver-class-name: org.postgresql.Driver
+    db-type: postgres
+    dialect: POSTGRES
+    url: jdbc:postgresql://${io.github.paulushcgcj.database.host}/${io.github.paulushcgcj.database.name}
+    username: ${io.github.paulushcgcj.database.username}
+    password: ${io.github.paulushcgcj.database.password}
+    pooled: true
+    maximumPoolSize: 10
+    minimumIdle: 10
+    transactionIsolation: TRANSACTION_READ_COMMITTED
+jpa:
+  default:
+    entity-scan:
+      packages: io.github.paulushcgcj.entity
+flyway:
+  datasources:
+    default:
+      enabled: true
