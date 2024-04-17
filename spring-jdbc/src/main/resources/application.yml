@@ -6,9 +6,11 @@ spring:
     banner-mode: "off"
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:postgresql://${io.github.paulushcgcj.database.host}/${io.github.paulushcgcj.database.name}?options=-c%20cryptic.key=${io.github.paulushcgcj.database.key}
+    url: jdbc:postgresql://${io.github.paulushcgcj.database.host}/${io.github.paulushcgcj.database.name}?ssl=true&sslmode=require&options=-c%20cryptic.key=${io.github.paulushcgcj.database.key}
     username: ${io.github.paulushcgcj.database.username}
     password: ${io.github.paulushcgcj.database.password}
+    ssl: true
+    ssl-root-cert: ${io.github.paulushcgcj.database.ssl-path}
     hikari:
       connectionTimeout: 90000
       idleTimeout: 45000
@@ -38,3 +40,4 @@ io:
         username: ${DB_USER:default}
         password: ${DB_PASS:default}
         key: ${DB_KEY:AES_KEY}
+        ssl-path: ${SSL_PATH}
