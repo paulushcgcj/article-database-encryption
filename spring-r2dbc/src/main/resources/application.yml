@@ -6,7 +6,7 @@ spring:
     banner-mode: "off"
     allow-bean-definition-overriding: true
   r2dbc:
-    url: r2dbc:postgresql://${io.github.paulushcgcj.database.host}/${io.github.paulushcgcj.database.name}?options=cryptic.key=${io.github.paulushcgcj.database.key}
+    url: r2dbc:postgresql://${io.github.paulushcgcj.database.host}/${io.github.paulushcgcj.database.name}?sslmode=require&sslrootcert=file:${io.github.paulushcgcj.database.ssl-path}&options=cryptic.key=${io.github.paulushcgcj.database.key}
     username: ${io.github.paulushcgcj.database.username}
     password: ${io.github.paulushcgcj.database.password}
     pool:
@@ -25,7 +25,9 @@ spring:
     baseline-on-migrate: true
     user: ${io.github.paulushcgcj.database.username}
     password: ${io.github.paulushcgcj.database.password}
-    url: jdbc:postgresql://${io.github.paulushcgcj.database.host}/${io.github.paulushcgcj.database.name}?options=-c%20cryptic.key=${io.github.paulushcgcj.database.key}
+    url: jdbc:postgresql://${io.github.paulushcgcj.database.host}/${io.github.paulushcgcj.database.name}?ssl=true&sslmode=require&options=-c%20cryptic.key=${io.github.paulushcgcj.database.key}
+    ssl: true
+    ssl-root-cert: ${io.github.paulushcgcj.database.ssl-path}
 
 management:
   endpoint:
@@ -46,3 +48,4 @@ io:
         username: ${DB_USER:default}
         password: ${DB_PASS:default}
         key: ${DB_KEY:AES_KEY}
+        ssl-path: ${SSL_PATH}
