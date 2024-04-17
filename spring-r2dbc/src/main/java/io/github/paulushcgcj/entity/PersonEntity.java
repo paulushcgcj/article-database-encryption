@@ -21,15 +21,16 @@ public class PersonEntity {
   private Long id;
 
   @Column(value = "first_name")
-  private String firstName;
+  private byte[] firstName;
 
   @Column(value = "last_name")
-  private String lastName;
+  private byte[] lastName;
 
   @Column(value = "email")
-  private String email;
+  private byte[] email;
 
   @Column(value = "gender")
-  private String gender;
+  private byte[] gender;
+
 
 }
