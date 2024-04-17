@@ -6,7 +6,7 @@ spring:
     banner-mode: "off"
     allow-bean-definition-overriding: true
   datasource:
-    url: jdbc:postgresql://${io.github.paulushcgcj.database.host}/${io.github.paulushcgcj.database.name}
+    url: jdbc:postgresql://${io.github.paulushcgcj.database.host}/${io.github.paulushcgcj.database.name}?options=-c%20cryptic.key=${io.github.paulushcgcj.database.key}
     username: ${io.github.paulushcgcj.database.username}
     password: ${io.github.paulushcgcj.database.password}
     hikari:
@@ -17,6 +17,9 @@ spring:
       poolName: DbCryptPool
       minimumIdle: 1
       maximumPoolSize: 3
+  flyway:
+    validate-on-migrate: true
+    baseline-on-migrate: true
 
 management:
   endpoint:
@@ -26,7 +29,6 @@ management:
     web:
       exposure:
         include: health,info
-
 io:
   github:
     paulushcgcj:
@@ -35,3 +37,4 @@ io:
         name: ${DB_NAME:dbcrypt}
         username: ${DB_USER:default}
         password: ${DB_PASS:default}
+        key: ${DB_KEY:AES_KEY}
